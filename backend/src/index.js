@@ -5,6 +5,8 @@ import 'dotenv/config';
 
 
 const app = express();
+// Remove the line below if you want to show the 'x-powered-by' header in the response (NOT recommended)
+app.set('x-powered-by', false);
 app.use(cors({
     origin: process.env.FRONTEND_ADDRESS,
     // Set the option below to `false` if you want to disallow credentials from being set in the request header
@@ -23,6 +25,14 @@ app.use(express.json());
 app.get('/ping', (req, res) => {
     res.status(200);
     res.send('Pong');
+});
+
+// 404 status code error handling
+app.use((req, res) => {
+    return res.status(404).json({
+        status: 404,
+        message: `Route ${req.baseUrl + req.path} not found.`
+    });
 });
 
 app.listen(process.env.PORT, () => {
