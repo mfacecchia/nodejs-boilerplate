@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "css": "postcss public/style/input.css -o public/style/style.css --watch"
+    "css": "postcss public/style/input.css -o public/style/style.css --watch",
+    "production": "node src/index.mjs",
+    "dev": "nodemon src/index.mjs"
   },
   "keywords": [],
   "author": "",
