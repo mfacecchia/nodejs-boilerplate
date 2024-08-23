@@ -1,6 +1,12 @@
 import AppError, { GenericAppError } from "../errors/custom.errors.js";
 
 
+export const defaultCookieOptions = {
+    secure: true,
+    httpOnly: true,
+    sameSite: "none"
+};
+
 export function clearAllCookies(req, res){
     try{
         for(const cookie in req.cookies){
