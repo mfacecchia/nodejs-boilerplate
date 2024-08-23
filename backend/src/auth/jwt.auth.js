@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import 'dotenv/config'
-import AppError, { JWTGenerationError } from '../errors/custom.errors.js';
+import AppError, { JWTGenerationError, JWTValidationError } from '../errors/custom.errors.js';
 import isObject from '../utils/isObject.utility.js';
 
 
@@ -19,5 +19,18 @@ export function generateJWT(payload = {}, { rememberMe = false, storeToken = fal
         console.log(err);
         if(err instanceof AppError) throw err;
         else throw new JWTGenerationError('Could not generate authorization token.');
+    }
+}
+
+// TODO: Add jwt presence check in Redis storage function call
+export function validateJWT(jsonWebToken, secret, { getFullToken = false } = {}){
+    try{
+        const decodedToken = jwt.verify(jsonWebToken, secret, { complete: Boolean(getFullToken) });
+        return decodedToken;
+    }catch(err){
+        if(err instanceof AppError) throw err;
+        if(err.name === 'TokenExpiredError') throw new JWTValidationError("Authorization token Expired.");
+        else if(err.name === 'JsonWebTokenError') throw new JWTValidationError('Invalid authorization token.');
+        throw new JWTValidationError('Could not validate the authorization token.');
     }
 }
