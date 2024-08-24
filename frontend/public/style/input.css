@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer base{
+    *{
+        @apply scroll-smooth;
+    }
+    body{
+        @apply overflow-x-clip min-h-screen flex flex-col relative;
+    }
+}
