@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+    <%- include('../partials/head.partial.ejs', {
+        title: 'Home'
+    }) %>
+    <body>
+        <section class = "h-screen w-full flex flex-col items-center justify-center gap-10" id = "welcome">
+            <div class = "flex flex-col gap-3">
+                <h1 class = "text-8xl text-center text-primary">Hello, World!</h1>
+                <p class = "text-primary text-2xl">This looks like the beginning for something incredible!</p>
+            </div>
+            <div class = "flex flex-col gap-3">
+                <p class = "text-primary text-xl mt-10">Made with <svg xmlns="http://www.w3.org/2000/svg" class = "fill-primary inline-block size-5 align-text-bottom" viewBox="0 0 24 24" alt = "Heart icon"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> by Feis</p>
+                <div class = "text-primary">
+                    <p class = "text-xl">Contact the developer</p>
+                    <div id = "devContacts" class = "flex gap-3 justify-center items-center">
+                        <a href = "https://github.com/mfacecchia/nodejs-boilerplate" target = "_blank" alt = "My GitHub Profile"><svg xmlns="http://www.w3.org/2000/svg" class = "inline-block size-5 stroke-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" alt = "GitHub icon"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                        <a href = "https://instagram.com/feis._.arts" target = "_blank" title = "My Instagram Profile"><svg xmlns="http://www.w3.org/2000/svg" class = "inline-block size-5 stroke-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" alt = "Instagram icon"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
