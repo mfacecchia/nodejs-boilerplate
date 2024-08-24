@@ -1,0 +1,18 @@
+<head>
+    <head>
+        <meta chartset = "UTF-8">
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    
+        <link rel = "stylesheet" href = "/style/style.css">
+        <link rel = "icon" href = "/assets/icons/favicon.webp">
+    
+        <%# Include custom stylesheets when including this partial in your page (optional) %>
+        <% if(typeof stylesheets !== 'undefined'){ stylesheets.forEach(stylesheet => { %> <link rel = "stylesheet" href = <%= stylesheet %>> <% })} %>
+    
+        <title>
+            Feis' NodeJS Boilerplate
+            <%# Set custom title for each page (optional) %>
+            <% if(typeof title !== 'undefined'){ %> - <%= title %> <% } %>
+        </title>
+    </head>
+</head>
