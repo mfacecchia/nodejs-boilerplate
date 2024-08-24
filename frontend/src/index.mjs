@@ -9,6 +9,10 @@ app.set('view engine', 'ejs');
 app.set('x-powered-by', false);
 
 
+app.get('/', (req, res) => {
+    res.render('pages/index');
+});
+
 // 404 status code error handling
 app.use((req, res) => {
     // TODO: Render 404 page instead of JSON response
