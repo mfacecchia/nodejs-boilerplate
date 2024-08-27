@@ -6,7 +6,11 @@ module.exports = {
     'public/script/*.js'
   ],
   theme: {
-    extend: {}
+    extend: {
+      fontFamily: {
+        'roboto': ['Roboto', 'sans-serif']
+      }
+    }
   },
   daisyui: {
     themes: [ 'dracula' ]
