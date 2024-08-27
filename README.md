@@ -52,6 +52,7 @@ This will install all the node modules and libraries required to run the project
 - [JWT](https://www.npmjs.com/package/jsonwebtoken)
 
 ## Environmental Variables
+A `.env.sample` file is provided in the project for both the [Frontend](https://github.com/mfacecchia/nodejs-boilerplate/blob/main/frontend/.env.sample) and the [Backend](https://github.com/mfacecchia/nodejs-boilerplate/blob/main/backend/.env.sample) with all instructions on how to use it in your project and customize it based on your needs.
 #### Frontend
 |Variable Name |Usage |
 |--------------|------|
