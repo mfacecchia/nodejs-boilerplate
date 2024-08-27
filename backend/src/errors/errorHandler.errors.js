@@ -6,6 +6,7 @@ export async function handleError(req, res, err){
     /**
      * Handles the provided `err` and returns a meaningful response based on the error type
      */
+    logError(err);
     if(err instanceof AppError){
         if(err instanceof ValidationError){
             return res.status(err.statusCode).json({

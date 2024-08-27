@@ -1,4 +1,5 @@
 import AppError, { GenericAppError } from "../errors/custom.errors.js";
+import { logError } from "../errors/errorHandler.errors.js";
 
 
 export const defaultCookieOptions = {
@@ -14,6 +15,7 @@ export function clearAllCookies(req, res){
         }
         // Future update: remove csrf && jwt from REDIS storage
     }catch(err){
+        logError(err);
         if(err instanceof AppError) throw err;
         else throw new GenericAppError('An unexpected error occurred. Please try again later.', 500);
     }
