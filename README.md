@@ -91,3 +91,5 @@ Feel like this boilerplate needs some adjustments or have you just found out a b
   - How to reproduce the bug
   - A video demonstration of the bug (if possible)
   - What you'd expect the functionality to do
+
+Any contribution is highly apreciated!
