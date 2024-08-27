@@ -10,4 +10,25 @@
     body{
         @apply overflow-x-clip min-h-screen flex flex-col relative;
     }
+    p{
+        @apply text-xl;
+    }
+    svg{
+        @apply inline-block size-5 stroke-secondary;
+    }
+    #welcome{
+        @apply h-screen w-full flex flex-col items-center justify-center text-center gap-10;
+    }
+    #welcome > div{
+        @apply flex flex-col gap-3 text-secondary;
+    }
+    #devContacts{
+        @apply flex gap-3 justify-center items-center;
+    }
+    .title h1{
+        @apply text-8xl;
+    }
+    .title h3{
+        @apply text-2xl
+    }
 }
