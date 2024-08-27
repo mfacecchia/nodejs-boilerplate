@@ -7,7 +7,9 @@ Boilerplate for NodeJS Frontend & Backend Web Application Development
 - [Built In - Technologies](#built-in---technologies)
 - [Modules References](#modules-references)
 - [Environmental Variables](#environmental-variables)
-- [Features](#features)
+- [Features](#built-in-features)
+- [Browser Support](#browser-support)
+- [Bug Reports](#bug-reports)
 
 ## Requirements
 - [NodeJS](https://nodejs.org/en/download/package-manager) (Latest version recommended)
@@ -74,3 +76,18 @@ A `.env.sample` file is provided in the project for both the [Frontend](https://
 - JWT Generation and Validation
 - Most common rate limiters for Login and Signup endpoints (Login and Signup endpoints currently not included in the project)
 - ...*and more to come* 👀...
+
+## Browser Support
+This project uses PostCSS along with the AutoPrefixer Plugin to support all the latest and stable releases of all major browsers.
+
+## Bug Reports
+Feel like this boilerplate needs some adjustments or have you just found out a bug or worse a vulnerability that needs to be resolved? Feel free to [open an issue](https://github.com/mfacecchia/nodejs-boilerplate/issues/new) and I will try to do my best to implement that new functionality  or to fix that bug as soon as possible!
+#### Notes to issue a Bug or a Vulnerability
+- Check if the issue has already been fixed
+- Check if the issue is already open from the [Issues Tracker](https://github.com/mfacecchia/nodejs-boilerplate/issues). It may have already been reported by somebody else
+- Provide a good test case, and write down the most descriptive and detailed explanation you can give. A good bug report should include:
+  - OS Version
+  - Browser Version
+  - How to reproduce the bug
+  - A video demonstration of the bug (if possible)
+  - What you'd expect the functionality to do
