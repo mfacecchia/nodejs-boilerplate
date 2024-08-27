@@ -8,10 +8,13 @@
         @apply scroll-smooth;
     }
     body{
-        @apply overflow-x-clip min-h-screen flex flex-col relative text-secondary;
+        @apply overflow-x-clip min-h-screen flex flex-col relative text-secondary font-roboto;
     }
     p, a{
         @apply text-xl;
+    }
+    a:hover{
+        @apply animate-pulse;
     }
     svg{
         @apply inline-block size-5 stroke-secondary fill-none;
