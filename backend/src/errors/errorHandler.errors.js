@@ -1,4 +1,5 @@
 import AppError, { ValidationError } from "./custom.errors.js";
+import 'dotenv/config';
 
 
 export async function handleError(req, res, err){
@@ -22,4 +23,11 @@ export async function handleError(req, res, err){
         status: 500,
         message: "An unexpected error occurred. Please try again later."
     });
+}
+
+export function logError(err){
+    /**
+     * Logs the caught `err` in the console if the app environment is 'development'
+     */
+    if(process.env.NODE_ENV === 'development') console.error(err);
 }
