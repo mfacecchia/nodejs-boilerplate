@@ -53,12 +53,16 @@ This will install all the node modules and libraries required to run the project
 
 ## Environmental Variables
 #### Frontend
-
+|Variable Name |Usage |
+|--------------|------|
+|PORT          |Express.JS server port |
+|NODE_ENV      |Application's current environment (`development` or `production`)(if the value is on `development`, all app errors will be printed out to console |
+|BACKEND_ADDRESS |Backend application's address and port (default to `127.0.0.1:3000`) |
 #### Backend
 |Variable Name |Usage |
 |--------------|------|
 |PORT          |Express.JS server port |
 |NODE_ENV      |Application's current environment (`development` or `production`)(if the value is on `development`, all app errors will be printed out to console |
-|FRONTEND_ADDRESS | Frontend application's address and port (default to `127.0.0.1:5500`)
+|FRONTEND_ADDRESS | Frontend application's address and port (default to `127.0.0.1:5500`) |
 |DATABASE_URL  |Database connection information (`type://user@password:port/dbname`) |
 |JWT_SECRET    |Json Web Token secret (used for token generation & validation) |
