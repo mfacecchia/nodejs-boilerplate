@@ -15,11 +15,7 @@ app.get('/', (req, res) => {
 
 // 404 status code error handling
 app.use((req, res) => {
-    // TODO: Render 404 page instead of JSON response
-    return res.status(404).json({
-        status: 404,
-        message: `Route ${req.baseUrl + req.path} not found.`
-    });
+    return res.render('pages/404');
 });
 
 app.listen(process.env.PORT, () => {
