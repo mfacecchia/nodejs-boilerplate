@@ -5,6 +5,7 @@ Boilerplate for NodeJS Frontend & Backend Web Application Development
 - [Requirements](#requirements)
 - [Quick Start](#quick-start)
 - [Built In - Technologies](#built-in---technologies)
+- [Modules References](#modules-references)
 
 ## Requirements
 - [NodeJS](https://nodejs.org/en/download/package-manager) (Latest version recommended)
@@ -32,3 +33,17 @@ This will install all the node modules and libraries required to run the project
 ![EJS](https://img.shields.io/badge/ejs-%23B4CA65.svg?style=for-the-badge&logo=ejs&logoColor=black)\
 ![MySQL](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
 ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
+
+## Modules References
+#### Backend
+[Express.JS](https://expressjs.com/en/4x/api.html#express) | [CORS](https://www.npmjs.com/package/cors) | [RateLimiter](https://express-rate-limit.mintlify.app/)
+#### Frontend
+[EJS](https://ejs.co/)
+[PostCSS](https://postcss.org/)
+[TailwindCSS](https://tailwindcss.com/docs/installation)
+[DaisyUI](https://daisyui.com/)
+#### Database
+[MySQL](https://dev.mysql.com/doc/refman/8.4/en/)
+[Prisma ORM](https://www.prisma.io/docs/getting-started/quickstart)
+#### Authentication
+[JWT](https://www.npmjs.com/package/jsonwebtoken)
