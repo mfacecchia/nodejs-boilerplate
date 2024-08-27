@@ -14,7 +14,7 @@
         @apply text-xl;
     }
     svg{
-        @apply inline-block size-5 stroke-secondary;
+        @apply inline-block size-5 stroke-secondary fill-none;
     }
     #welcome{
         @apply h-screen w-full flex flex-col items-center justify-center text-center gap-10;
