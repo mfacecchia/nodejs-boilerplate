@@ -518,6 +518,7 @@ html {
   display: inline-block;
   width: 1.25rem;
   height: 1.25rem;
+  fill: none;
   stroke: var(--fallback-s,oklch(var(--s)/1));
 }
     #welcome {
@@ -768,6 +769,9 @@ html {
 }
 .fill-secondary {
   fill: var(--fallback-s,oklch(var(--s)/1));
+}
+.align-text-top {
+  vertical-align: text-top;
 }
 .align-text-bottom {
   vertical-align: text-bottom;
