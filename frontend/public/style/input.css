@@ -8,9 +8,9 @@
         @apply scroll-smooth;
     }
     body{
-        @apply overflow-x-clip min-h-screen flex flex-col relative;
+        @apply overflow-x-clip min-h-screen flex flex-col relative text-secondary;
     }
-    p{
+    p, a{
         @apply text-xl;
     }
     svg{
@@ -20,7 +20,7 @@
         @apply h-screen w-full flex flex-col items-center justify-center text-center gap-10;
     }
     #welcome > div{
-        @apply flex flex-col gap-3 text-secondary;
+        @apply flex flex-col gap-3;
     }
     #devContacts{
         @apply flex gap-3 justify-center items-center;

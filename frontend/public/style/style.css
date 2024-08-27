@@ -507,8 +507,10 @@ html {
   min-height: 100vh;
   flex-direction: column;
   overflow-x: clip;
+  --tw-text-opacity: 1;
+  color: var(--fallback-s,oklch(var(--s)/var(--tw-text-opacity)));
 }
-    p {
+    p, a {
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
@@ -532,8 +534,6 @@ html {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  --tw-text-opacity: 1;
-  color: var(--fallback-s,oklch(var(--s)/var(--tw-text-opacity)));
 }
     #devContacts {
   display: flex;
@@ -762,34 +762,12 @@ html {
     opacity: 1;
   }
 }
-.inline-block {
-  display: inline-block;
-}
-.flex {
-  display: flex;
-}
-.size-5 {
-  width: 1.25rem;
-  height: 1.25rem;
-}
 .size-6 {
   width: 1.5rem;
   height: 1.5rem;
 }
-.items-center {
-  align-items: center;
-}
-.justify-center {
-  justify-content: center;
-}
-.gap-3 {
-  gap: 0.75rem;
-}
 .fill-secondary {
   fill: var(--fallback-s,oklch(var(--s)/1));
-}
-.stroke-secondary {
-  stroke: var(--fallback-s,oklch(var(--s)/1));
 }
 .align-text-bottom {
   vertical-align: text-bottom;
