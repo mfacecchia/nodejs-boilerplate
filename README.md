@@ -7,6 +7,7 @@ Boilerplate for NodeJS Frontend & Backend Web Application Development
 - [Built In - Technologies](#built-in---technologies)
 - [Modules References](#modules-references)
 - [Environmental Variables](#environmental-variables)
+- [Features](#features)
 
 ## Requirements
 - [NodeJS](https://nodejs.org/en/download/package-manager) (Latest version recommended)
@@ -67,3 +68,9 @@ A `.env.sample` file is provided in the project for both the [Frontend](https://
 |FRONTEND_ADDRESS | Frontend application's address and port (default to `127.0.0.1:5500`) |
 |DATABASE_URL  |Database connection information (`type://user@password:port/dbname`) |
 |JWT_SECRET    |Json Web Token secret (used for token generation & validation) |
+
+## Built-In Features
+- Custom classes with the most commonly generated errors & relative errors handling function
+- JWT Generation and Validation
+- Most common rate limiters for Login and Signup endpoints (Login and Signup endpoints currently not included in the project)
+- ...*and more to come* 👀...
