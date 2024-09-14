@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import 'dotenv/config'
-import AppError, { JWTGenerationError, JWTValidationError } from '../errors/custom.errors.js';
+import AppError, { TokenGenerationError, TokenValidationError } from '../errors/custom.errors.js';
 import { logError } from '../errors/errorHandler.errors.js';
 import isObject from '../utils/isObject.utility.js';
 
@@ -19,7 +19,7 @@ export function generateJWT(payload = {}, { rememberMe = false, storeToken = fal
     }catch(err){
         logError(err);
         if(err instanceof AppError) throw err;
-        else throw new JWTGenerationError('Could not generate authorization token.');
+        else throw new TokenGenerationError('Could not generate authorization token.');
     }
 }
 
@@ -31,8 +31,8 @@ export function validateJWT(jsonWebToken, secret, { getFullToken = false } = {})
     }catch(err){
         logError(err);
         if(err instanceof AppError) throw err;
-        if(err.name === 'TokenExpiredError') throw new JWTValidationError("Authorization token Expired.");
-        else if(err.name === 'JsonWebTokenError') throw new JWTValidationError('Invalid authorization token.');
-        throw new JWTValidationError('Could not validate the authorization token.');
+        if(err.name === 'TokenExpiredError') throw new TokenValidationError("Authorization token Expired.");
+        else if(err.name === 'JsonWebTokenError') throw new TokenValidationError('Invalid authorization token.');
+        throw new TokenValidationError('Could not validate the authorization token.');
     }
 }
