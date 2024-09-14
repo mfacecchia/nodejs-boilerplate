@@ -56,50 +56,34 @@ export class ValidationError extends AppError{
     }
 }
 
-export class UserNotFoundError extends AppError{
+export class NotFoundError extends AppError{
     constructor(message){
         super(message);
-        this.name = "UserNotFoundError";
+        this.name = "NotFoundError";
         this.statusCode = 404;
     }
 }
 
-export class UserFoundError extends AppError{
+export class FoundError extends AppError{
     constructor(message){
         super(message);
-        this.name = "UserFoundError";
+        this.name = "FoundError";
         this.statusCode = 400;
     }
 }
 
-export class JWTGenerationError extends AppError{
+export class TokenGenerationError extends AppError{
     constructor(message){
         super(message);
-        this.name = "JWTGenerationError";
+        this.name = "TokenGenerationError";
         this.statusCode = 500;
     }
 }
 
-export class JWTValidationError extends AppError{
+export class TokenValidationError extends AppError{
     constructor(message){
         super(message);
-        this.name = "JWTValidationError";
-        this.statusCode = 401;
-    }
-}
-
-export class CSRFGenerationError extends AppError{
-    constructor(message){
-        super(message);
-        this.name = "CSRFGenerationError";
-        this.statusCode = 500;
-    }
-}
-
-export class CSRFValidationError extends AppError{
-    constructor(message){
-        super(message);
-        this.name = "CSRFValidationError";
+        this.name = "TokenValidationError";
         this.statusCode = 401;
     }
 }
