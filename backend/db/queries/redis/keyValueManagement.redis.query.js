@@ -16,7 +16,7 @@ const redisPrefixes = {
     }
 };
 
-export async function getKeyValue(key, code = null){
+export async function getKeyValue(key, code = undefined){
     /**
      * Gets the key-related value by querying Redis storage
      * For custom preset keys, pass the prefix name in the `key` function parameter and the relative `code` to embed with the key
@@ -36,7 +36,7 @@ export async function getKeyValue(key, code = null){
     }
 }
 
-export async function isKeyValueExistent(key, code = null){
+export async function isKeyValueExistent(key, code = undefined){
     /**
      * Checks if the key-value pair is in Redis storage
      * For custom preset keys, pass the prefix name in the `key` function parameter and the relative `code` to embed with the key
@@ -55,7 +55,7 @@ export async function isKeyValueExistent(key, code = null){
 }
 
 
-export async function storeKeyValue(key, code = null, value, expiryInSeconds = 0){
+export async function storeKeyValue(key, code = undefined, value, expiryInSeconds = 0){
     /**
      * Stores the key-value pair in Redis storage with a custom `expiryInSeconds`
      * For custom preset keys, pass the prefix name in the `key` function parameter and the relative `code` to embed with the key
@@ -75,7 +75,7 @@ export async function storeKeyValue(key, code = null, value, expiryInSeconds = 0
     }
 }
 
-export async function removeKeyValue(key, code = null){
+export async function removeKeyValue(key, code = undefined){
     /**
      * Removes the key-value pair from Redis storage
      * For custom preset keys, pass the prefix name in the `key` function parameter and the relative `code` to embed with the key
