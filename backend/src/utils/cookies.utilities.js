@@ -17,6 +17,6 @@ export function clearAllCookies(req, res){
     }catch(err){
         logError(err);
         if(err instanceof AppError) throw err;
-        else throw new GenericAppError('An unexpected error occurred. Please try again later.', 500);
+        throw new GenericAppError('An unexpected error occurred. Please try again later.', 500);
     }
 }

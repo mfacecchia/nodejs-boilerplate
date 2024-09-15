@@ -21,7 +21,7 @@ export async function generateJWT(payload = {}, userID = undefined, { rememberMe
     }catch(err){
         logError(err);
         if(err instanceof AppError) throw err;
-        else throw new TokenGenerationError('Could not generate authorization token.');
+        throw new TokenGenerationError('Could not generate authorization token.');
     }
 }
 

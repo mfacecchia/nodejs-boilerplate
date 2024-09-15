@@ -33,7 +33,7 @@ export async function getKeyValue(key, code = undefined){
         return value;
     }catch(err){
         if(err instanceof AppError) throw err;
-        else throw new DataFetchError('Could not fetch data.');
+        throw new DataFetchError('Could not fetch data.');
     }
 }
 
@@ -52,7 +52,7 @@ export async function isKeyValueExistent(key, code = undefined){
     }catch(err){
         logError(err);
         if(err instanceof AppError) throw err;
-        else throw new DataFetchError('Could not fetch data.');
+        throw new DataFetchError('Could not fetch data.');
     }
 }
 
@@ -74,7 +74,7 @@ export async function storeKeyValue(key, code = undefined, value, expiryInSecond
     }catch(err){
         logError(err);
         if(err instanceof AppError) throw err;
-        else throw new DataFetchError('Could not fetch data.');
+        throw new DataFetchError('Could not fetch data.');
     }
 }
 
@@ -93,6 +93,6 @@ export async function removeKeyValue(key, code = undefined){
     }catch(err){
         logError(err);
         if(err instanceof AppError) throw err;
-        else throw new DataFetchError('Could not fetch data.');
+        throw new DataFetchError('Could not fetch data.');
     }
 }
