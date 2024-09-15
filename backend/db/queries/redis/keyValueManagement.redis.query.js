@@ -1,6 +1,7 @@
 import { RedisClient } from "../../redisClient.db.js";
 import AppError, { TokenValidationError, DataFetchError, NotFoundError } from "../../../src/errors/custom.errors.js";
 import 'dotenv/config';
+import { logError } from "../../../src/errors/errorHandler.errors.js";
 
 
 const redis = new RedisClient(process.env.REDIS_URL);
@@ -49,6 +50,7 @@ export async function isKeyValueExistent(key, code = undefined){
         const keyValueExists = await redis.client.exists(fullKey);
         return Boolean(keyValueExists);
     }catch(err){
+        logError(err);
         if(err instanceof AppError) throw err;
         else throw new DataFetchError('Could not fetch data.');
     }
@@ -70,6 +72,7 @@ export async function storeKeyValue(key, code = undefined, value, expiryInSecond
         await redis.client.set(fullKey, value, options);
         return true;
     }catch(err){
+        logError(err);
         if(err instanceof AppError) throw err;
         else throw new DataFetchError('Could not fetch data.');
     }
@@ -88,6 +91,7 @@ export async function removeKeyValue(key, code = undefined){
         await redis.client.del(fullKey);
         return true;
     }catch(err){
+        logError(err);
         if(err instanceof AppError) throw err;
         else throw new DataFetchError('Could not fetch data.');
     }
