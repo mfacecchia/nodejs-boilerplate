@@ -7,7 +7,7 @@ import { isKeyValueExistent, storeKeyValue } from '../../db/queries/redis/keyVal
 
 
 // NOTE: `storeToken` as a flag to store JWT in Redis storage
-export async function generateJWT(payload = {}, userID = undefined, { rememberMe = false, storeToken = false } = {}){
+export async function generateJWT(payload = {}, userID = undefined, { rememberMe = false, storeToken = true } = {}){
     try{
         const redisKeyName = 'JWT';
         const options = {};
