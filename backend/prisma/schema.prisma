@@ -14,3 +14,21 @@ datasource db {
 }
 
 // Place here database models
+model User {
+  userID Int @id @default(autoincrement())
+  firstName String
+  lastName String
+  createdAt Int
+  updatedAt Int
+
+  credential Credential[]
+}
+
+model Credential {
+  email String @id
+  password String
+  verified Boolean @default(false)
+  userID Int @unique
+
+  user User @relation(fields: [userID], references: [userID], onDelete: Cascade)
+}
