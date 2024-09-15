@@ -32,6 +32,7 @@ export async function getKeyValue(key, code = undefined){
         if(!value) throw chosenRedisPrefix? chosenRedisPrefix.invalidKeyError: new NotFoundError('Value not found.');
         return value;
     }catch(err){
+        logError(err);
         if(err instanceof AppError) throw err;
         throw new DataFetchError('Could not fetch data.');
     }
