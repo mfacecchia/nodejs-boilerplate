@@ -1,5 +1,5 @@
-import AppError, { GenericAppError } from "../errors/custom.errors.js";
-import { logError } from "../errors/errorHandler.errors.js";
+import AppError, { GenericAppError } from '../errors/custom.errors.js';
+import { logError } from '../errors/errorHandler.errors.js';
 
 
 export const defaultCookieOptions = {

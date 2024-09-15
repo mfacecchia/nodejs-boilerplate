@@ -1,4 +1,4 @@
-import AppError, { ValidationError } from "./custom.errors.js";
+import AppError, { ValidationError } from './custom.errors.js';
 import 'dotenv/config';
 
 

@@ -1,6 +1,6 @@
 import { createClient } from 'redis';
 import { logError } from '../src/errors/errorHandler.errors.js';
-import { RedisConnectionError } from "../src/errors/custom.errors.js";
+import { RedisConnectionError } from '../src/errors/custom.errors.js';
 
 
 export class RedisClient {

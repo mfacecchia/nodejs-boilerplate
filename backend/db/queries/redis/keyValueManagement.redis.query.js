@@ -1,7 +1,7 @@
-import { RedisClient } from "../../redisClient.db.js";
-import AppError, { TokenValidationError, DataFetchError, NotFoundError } from "../../../src/errors/custom.errors.js";
+import { RedisClient } from '../../redisClient.db.js';
+import AppError, { TokenValidationError, DataFetchError, NotFoundError } from '../../../src/errors/custom.errors.js';
 import 'dotenv/config';
-import { logError } from "../../../src/errors/errorHandler.errors.js";
+import { logError } from '../../../src/errors/errorHandler.errors.js';
 
 
 const redis = new RedisClient(process.env.REDIS_URL);
