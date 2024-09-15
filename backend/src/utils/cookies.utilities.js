@@ -1,5 +1,6 @@
 import AppError, { GenericAppError } from '../errors/custom.errors.js';
 import { logError } from '../errors/errorHandler.errors.js';
+import { removeKeyValue } from '../../db/queries/redis/keyValueManagement.redis.query.js';
 
 
 export const defaultCookieOptions = {
@@ -8,15 +9,20 @@ export const defaultCookieOptions = {
     sameSite: "none"
 };
 
-export function clearAllCookies(req, res){
+export async function clearAllCookies(req, res){
     try{
+        const { userSession: jsonWebToken } = req.cookies;
+        const csrfToken = req.cookies?.csrf || req.body.csrf;
         for(const cookie in req.cookies){
             res.clearCookie(cookie);
         }
-        // Future update: remove csrf && jwt from REDIS storage
+        await Promise.all([
+            removeKeyValue('JWT', jsonWebToken),
+            removeKeyValue('CSRF', csrfToken)
+        ]);
     }catch(err){
         logError(err);
         if(err instanceof AppError) throw err;
-        throw new GenericAppError('An unexpected error occurred. Please try again later.', 500);
+        else throw new GenericAppError('An unexpected error occurred. Please try again later.', 500);
     }
 }
