@@ -3,18 +3,20 @@ import 'dotenv/config'
 import AppError, { TokenGenerationError, TokenValidationError } from '../errors/custom.errors.js';
 import { logError } from '../errors/errorHandler.errors.js';
 import isObject from '../utils/isObject.utility.js';
+import { isKeyValueExistent, storeKeyValue } from '../../db/queries/redis/keyValueManagement.redis.query.js';
 
 
 // NOTE: `storeToken` as a flag to store JWT in Redis storage
-// TODO: Add store JWT in Redis function call
-export function generateJWT(payload = {}, { rememberMe = false, storeToken = false } = {}){
+export async function generateJWT(payload = {}, userID = undefined, { rememberMe = false, storeToken = false } = {}){
     try{
+        const redisKeyName = 'JWT';
         const options = {};
         // 60 Days default expiry (in seconds)
         const tokenExpiry = 60 * 60 * 24 * 60;
         if(!rememberMe) options.expiresIn = tokenExpiry;
         if(!isObject(payload)) payload = {};
         const jsonWebToken = jwt.sign(payload, process.env.JWT_SECRET, options);
+        if(storeToken) await storeKeyValue(redisKeyName, jsonWebToken, userID, !rememberMe? tokenExpiry: 0);
         return jsonWebToken;
     }catch(err){
         logError(err);
@@ -23,10 +25,11 @@ export function generateJWT(payload = {}, { rememberMe = false, storeToken = fal
     }
 }
 
-// TODO: Add jwt presence check in Redis storage function call
-export function validateJWT(jsonWebToken, secret, { getFullToken = false } = {}){
+export async function validateJWT(jsonWebToken, secret, { getFullToken = false } = {}){
     try{
+        const redisKeyName = 'JWT';
         const decodedToken = jwt.verify(jsonWebToken, secret, { complete: Boolean(getFullToken) });
+        if(!(await isKeyValueExistent(redisKeyName, jsonWebToken))) throw new TokenValidationError('Invalid authorization token.');
         return decodedToken;
     }catch(err){
         logError(err);
