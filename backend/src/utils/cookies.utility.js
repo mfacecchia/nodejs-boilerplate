@@ -3,12 +3,6 @@ import { logError } from '../errors/errorHandler.errors.js';
 import { removeKeyValue } from '../../db/queries/redis/keyValueManagement.redis.query.js';
 
 
-export const defaultCookieOptions = {
-    secure: true,
-    httpOnly: true,
-    sameSite: "none"
-};
-
 export async function clearAllCookies(req, res){
     try{
         const { userSession: jsonWebToken } = req.cookies;
