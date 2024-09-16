@@ -1,5 +1,5 @@
 import AppError, { ValidationError } from './custom.errors.js';
-import { clearAllCookies } from '../utils/cookies.utilities.js';
+import { clearAllCookies } from '../utils/cookies.utility.js';
 import 'dotenv/config';
 
 
