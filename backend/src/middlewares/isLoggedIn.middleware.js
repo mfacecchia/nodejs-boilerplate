@@ -6,7 +6,7 @@ import { handleError, logError } from "../errors/errorHandler.errors.js";
 import 'dotenv/config';
 
 
-export default function isLoggedIn(strict = true, sendResponseOnValidToken = false, returnLastUserValues = false){
+export default function isLoggedIn({ strict = true, sendResponseOnValidToken = false, returnLastUserValues = false } = {}){
     /**
      * Checks if the user is already logged in by validating the JWT passed in the request header (parsed by cookie-parser in `req.cookies`)
      * Sends a response in case the JWT is invalid or missing (if `strict` is set to `true`)...
@@ -32,7 +32,7 @@ export default function isLoggedIn(strict = true, sendResponseOnValidToken = fal
                 return res.status(200).json({
                     status: 200,
                     message: "Logged in successfully.",
-                    verified: userData.credential.verified
+                    verified: userData.credential[0].verified
                 });
             }
             if(returnLastUserValues) req.lastUserValues = userData;
