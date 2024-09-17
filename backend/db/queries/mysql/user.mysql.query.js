@@ -17,7 +17,7 @@ export async function findUser(userField, { isID = true, throwOnFound = false, g
             },
             where: {
                 credential: {
-                    some: isID? { userID: userField? +userField: undefined }: { email: userField? String(userField): undefined }
+                    some: isID? { userID: +userField }: { email: String(userField) }
                 }
             }
         });
