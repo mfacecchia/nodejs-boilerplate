@@ -2,6 +2,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import 'dotenv/config';
+import userAuth from './routes/auth.routing.js';
 
 
 const app = express();
@@ -26,6 +27,8 @@ app.get('/ping', (req, res) => {
     res.status(200);
     res.send('Pong');
 });
+
+userAuth(app);
 
 // 404 status code error handling
 app.use((req, res) => {
