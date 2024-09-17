@@ -56,7 +56,7 @@ export async function createUserWithCredentials(firstName, lastName, email, hash
         logError(err);
         if(err instanceof PrismaClientInitializationError) throw new DatabaseConnectionError('Failed connection to database.');
         else if(err instanceof PrismaClientKnownRequestError){
-            if(err.code === 'P2002') throw new DatabaseQueryError('Could not create the user. Already registered.');
+            if(err.code === 'P2002') throw new FoundError('Could not create the user. Already registered.');
             else if(err.code === 'P2004') throw new DatabaseQueryError('Could not create the user. Invalid data.');
         }
         else if(err instanceof PrismaClientValidationError) throw new DatabaseQueryError('Could not create the user. Invalid or missing required data.');
@@ -125,7 +125,7 @@ export async function updateUser(userID, firstName, lastName, email, hashedPassw
         logError(err);
         if(err instanceof PrismaClientInitializationError) throw new DatabaseConnectionError('Failed connection to database.');
         else if(err instanceof PrismaClientKnownRequestError){
-            if(err.code === 'P2002') throw new DatabaseQueryError('Could not update the user. Email already registered.');
+            if(err.code === 'P2002') throw new FoundError('Could not update the user. Email already registered.');
             else if(err.code === 'P2004') throw new DatabaseQueryError('Could not update the user. Invalid data.');
         }
         else if(err instanceof PrismaClientValidationError) throw new DatabaseQueryError('Could not update the user. Invalid or missing required data.');
@@ -145,7 +145,7 @@ export async function deleteUser(userID){
         logError(err);
         if(err instanceof PrismaClientInitializationError) throw new DatabaseConnectionError('Failed connection to database.');
         else if(err instanceof PrismaClientKnownRequestError){
-            if(err.code === 'P2025') throw new DatabaseQueryError('Could not delete the user. User does not exist.');
+            if(err.code === 'P2025') throw new NotFoundError('Could not delete the user. User does not exist.');
         }
         throw new DatabaseQueryError('Unexpected error while updating the user. Please try again later.');
     }
