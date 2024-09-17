@@ -10,11 +10,11 @@ import { generateCsrf } from '../security/csrf.security.js';
 import { defaultCookieOptions } from '../utils/constants.utility.js';
 import { clearAllCookies } from '../utils/cookies.utility.js';
 import { validateLogin, validateSignup } from '../validation/auth.validator.js';
+import { loginRateLimit, signupRateLimit } from '../utils/rateLimiters.utility.js';
 
 
-// TODO: Add Validator and rate limit mws on all endpoints
 export default function userAuth(app){
-    app.post('/user/login/credentials', isLoggedIn({ strict: false, returnLastUserValues: false, sendResponseOnValidToken: true }), validateLogin(), async (req, res) => {
+    app.post('/user/login/credentials', isLoggedIn({ strict: false, returnLastUserValues: false, sendResponseOnValidToken: true }), validateLogin(), loginRateLimit, async (req, res) => {
         try{
             const userData = await findUser(req.body.email, { isID: false, throwOnFound: false, getFullInfo: true });
             const passwordMatches = await argon2.verify(userData.credential[0].password, req.body.password);
@@ -33,7 +33,7 @@ export default function userAuth(app){
         }
     });
     
-    app.post('/user/signup/credentials', isLoggedIn({ strict: false, returnLastUserValues: false, sendResponseOnValidToken: true }), validateSignup(), async (req, res) => {
+    app.post('/user/signup/credentials', isLoggedIn({ strict: false, returnLastUserValues: false, sendResponseOnValidToken: true }), validateSignup(), signupRateLimit, async (req, res) => {
         try{
             const { firstName, lastName, email, password } = req.body;
             const hashedPassword = await hashPassword(password);
