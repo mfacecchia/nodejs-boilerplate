@@ -29,3 +29,25 @@ export const signupRateLimit = rateLimit({
         message: "Too many signup attempts. Please try again in a few minutes."
     }
 });
+
+export const userUpdateRateLimit = rateLimit({
+    ...defaultRateLimiterOptions,
+    // 30 minutes
+    windowMs: 30 * 60 * 1000,
+    limit: 10,
+    message: {
+        status: defaultStatusCode,
+        message: "Too many user update attempts. Please try again in a few minutes."
+    }
+});
+
+export const userDeleteRateLimit = rateLimit({
+    ...defaultRateLimiterOptions,
+    // 30 minutes
+    windowMs: 30 * 60 * 1000,
+    limit: 3,
+    message: {
+        status: defaultStatusCode,
+        message: "Too many user deletion attempts. Please try again in a few minutes."
+    }
+});
