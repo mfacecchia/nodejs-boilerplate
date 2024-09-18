@@ -103,3 +103,19 @@ export class PasswordHashError extends AppError{
         this.statusCode = 500;
     }
 }
+
+export class PasswordMismatchError extends AppError{
+    constructor(message){
+        super(message);
+        this.name = "PasswordMismatchError";
+        this.statusCode = 400;
+    }
+}
+
+export class PasswordReuseError extends AppError{
+    constructor(message){
+        super(message);
+        this.name = "PasswordReuseError";
+        this.statusCode = 400;
+    }
+}
