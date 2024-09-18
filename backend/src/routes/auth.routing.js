@@ -11,6 +11,8 @@ import { defaultCookieOptions } from '../utils/constants.utility.js';
 import { clearAllCookies } from '../utils/cookies.utility.js';
 import { validateLogin, validateSignup } from '../validation/auth.validator.js';
 import { loginRateLimit, signupRateLimit } from '../utils/rateLimiters.utility.js';
+import { verifyEmail } from '../../db/queries/mysql/emailVerification.mysql.query.js';
+import { getKeyValue, removeKeyValue } from '../../db/queries/redis/keyValueManagement.redis.query.js';
 import sendEmailVerificationEmail from '../mail/emailVerification.mail.js';
 import isCsrfTokenValid from '../middlewares/isCsrfTokenValid.middleware.js';
 import isEmailVerified from '../middlewares/isEmailVerified.middleware.js';
@@ -56,6 +58,24 @@ export default function userAuth(app){
             return res.status(200).json({
                 status: 200,
                 message: "Logged out successfully."
+            });
+        }catch(err){
+            return await handleError(req, res, err);
+        }
+    });
+
+    app.post('/user/verify', async (req, res) => {
+        try{
+            const keyName = 'emailVerification'
+            const { verificationCode } = req.body;
+            const userID = await getKeyValue(keyName, verificationCode);
+            await Promise.all([
+                verifyEmail(userID),
+                removeKeyValue(keyName, verificationCode)
+            ]);
+            return res.status(200).json({
+                status: 200,
+                message: "Email successfully verified."
             });
         }catch(err){
             return await handleError(req, res, err);
