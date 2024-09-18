@@ -96,7 +96,7 @@ export async function createUserWithOAuth(firstName, lastName, googleID, githubI
     }
 }
 
-export async function updateUser(userID, firstName, lastName, email, hashedPassword){
+export async function updateUser(userID, firstName, lastName, email, hashedPassword, { getFullInfo = false } = {}){
     try{
         const user = await prisma.user.update({
             data: {
@@ -118,6 +118,9 @@ export async function updateUser(userID, firstName, lastName, email, hashedPassw
             },
             where: {
                 userID: +userID
+            },
+            include: {
+                credential: Boolean(getFullInfo)
             }
         });
         return user;
