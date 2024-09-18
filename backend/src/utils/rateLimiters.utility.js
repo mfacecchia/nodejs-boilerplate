@@ -51,3 +51,25 @@ export const userDeleteRateLimit = rateLimit({
         message: "Too many user deletion attempts. Please try again in a few minutes."
     }
 });
+
+export const codeVerificationRateLimit = rateLimit({
+    ...defaultRateLimiterOptions,
+    // 30 minutes
+    windowMs: 30 * 60 * 1000,
+    limit: 10,
+    message: {
+        status: defaultStatusCode,
+        message: "Too many code verification attempts. Please try again in a few minutes."
+    }
+});
+
+export const newCodeGenerationRateLimit = rateLimit({
+    ...defaultRateLimiterOptions,
+    // 30 minutes
+    windowMs: 30 * 60 * 1000,
+    limit: 3,
+    message: {
+        status: defaultStatusCode,
+        message: "Too many password reset code generation requests. Please try again in a few minutes."
+    }
+});
