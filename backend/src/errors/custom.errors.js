@@ -119,3 +119,27 @@ export class PasswordReuseError extends AppError{
         this.statusCode = 400;
     }
 }
+
+export class ViewRenderError extends AppError{
+    constructor(message){
+        super(message);
+        this.name = "ViewRenderError";
+        this.statusCode = 500;
+    }
+}
+
+export class MailingSystemConnectionError extends AppError{
+    constructor(message){
+        super(message);
+        this.name = "MailingSystemConnectionError";
+        this.statusCode = 500;
+    }
+}
+
+export class EmailSendError extends AppError{
+    constructor(message){
+        super(message);
+        this.name = "EmailSendError";
+        this.statusCode = 500;
+    }
+}
