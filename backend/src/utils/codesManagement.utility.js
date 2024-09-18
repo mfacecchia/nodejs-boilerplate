@@ -2,10 +2,12 @@ import crypto from 'crypto';
 import 'dotenv/config';
 import { isKeyValueExistent, storeKeyValue } from '../../db/queries/redis/keyValueManagement.redis.query.js';
 import AppError, { GenericAppError, GenerationError } from '../errors/custom.errors.js';
+import { logError } from '../errors/errorHandler.errors.js';
 
 
 const codesOptions = {
     emailVerification: {
+        // Frontend path for email verification
         url: `/user/verify`,
         generationFailedError: new GenerationError('Unable to generate a valid Email verification code.')
     },
@@ -47,6 +49,7 @@ export async function generateCode(codeType, userID){
             link: `${process.env.FRONTEND_ADDRESS}${chosenCodeOptions.url}?q=${generatedCode}`
         };
     }catch(err){
+        logError(err);
         if(err instanceof AppError) throw err;
         else throw new GenericAppError('An unexpected error occurred. Please try again later.', 500);
     }
