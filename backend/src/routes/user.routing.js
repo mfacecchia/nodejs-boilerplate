@@ -2,7 +2,7 @@ import isLoggedIn from "../middlewares/isLoggedIn.middleware.js";
 import isCsrfTokenValid from "../middlewares/isCsrfTokenValid.middleware.js";
 import { handleError } from "../errors/errorHandler.errors.js";
 import { clearAllCookies } from "../utils/cookies.utility.js";
-import { updateUser } from "../../db/queries/mysql/user.mysql.query.js";
+import { deleteUser, updateUser } from "../../db/queries/mysql/user.mysql.query.js";
 import { hashPassword } from "../security/hashing.security.js";
 
 
@@ -40,4 +40,16 @@ export default function userManagement(app){
                 return await handleError(req, res, err);
             }
         })
+        .delete(isLoggedIn({ strict: true, sendResponseOnValidToken: false, returnLastUserValues: true }), isCsrfTokenValid(), async (req, res) => {
+            try{
+                await deleteUser(req.lastUserValues.userID);
+                await clearAllCookies(req, res);
+                return res.status(200).json({
+                    status: 200,
+                    message: "User successfully deleted"
+                });
+            }catch(err){
+                return await handleError(req, res, err);
+            }
+        });
 }
