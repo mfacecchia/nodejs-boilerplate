@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import 'dotenv/config'
-import AppError, { TokenGenerationError, TokenValidationError } from '../errors/custom.errors.js';
+import AppError, { GenerationError, TokenValidationError } from '../errors/custom.errors.js';
 import { logError } from '../errors/errorHandler.errors.js';
 import isObject from '../utils/isObject.utility.js';
 import { isKeyValueExistent, storeKeyValue } from '../../db/queries/redis/keyValueManagement.redis.query.js';
@@ -21,7 +21,7 @@ export async function generateJWT(payload = {}, userID = undefined, { rememberMe
     }catch(err){
         logError(err);
         if(err instanceof AppError) throw err;
-        throw new TokenGenerationError('Could not generate authorization token.');
+        throw new GenerationError('Could not generate authorization token.');
     }
 }
 

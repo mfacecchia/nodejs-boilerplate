@@ -1,6 +1,6 @@
 import Tokens from 'csrf';
 import { getKeyValue, storeKeyValue } from '../../db/queries/redis/keyValueManagement.redis.query.js';
-import AppError, { TokenGenerationError, TokenValidationError } from '../errors/custom.errors.js';
+import AppError, { GenerationError, TokenValidationError } from '../errors/custom.errors.js';
 import { logError } from '../errors/errorHandler.errors.js';
 
 
@@ -18,7 +18,7 @@ export async function generateCsrf({ storeToken = false } = {}){
     }catch(err){
         logError(err);
         if(err instanceof AppError) throw err;
-        throw new TokenGenerationError('Could not generate security token.');
+        throw new GenerationError('Could not generate security token.');
     }
 }
 
