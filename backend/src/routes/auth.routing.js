@@ -64,6 +64,7 @@ export default function userAuth(app){
         }
     });
 
+    // TODO: Add rate limit mw
     app.post('/user/verify', async (req, res) => {
         try{
             const keyName = 'emailVerification'
@@ -82,11 +83,12 @@ export default function userAuth(app){
         }
     });
     
+    // TODO: Add rate limit mw
     app.post('/user/verify/generate', isLoggedIn({ strict: true, sendResponseOnValidToken: false, returnLastUserValues: true }), isCsrfTokenValid(), isEmailVerified({ strict: false, sendResponseOnVerifiedEmail: true }), async (req, res) => {
         try{
             const { userID, firstName, lastName } = req.lastUserValues;
             const { email } = req.lastUserValues.credential[0];
-            await sendEmailVerificationEmail(email, firstName, lastName, userID);
+            await sendEmailVerificationEmail(userID, email, firstName, lastName);
             return res.status(200).json({
                 status: 200,
                 message: "Verification code sent. Check your inbox or the spam folder."

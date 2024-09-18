@@ -6,7 +6,7 @@ import { generateCode } from "../utils/codesManagement.utility.js";
 import { logError } from "../errors/errorHandler.errors.js";
 
 
-export default async function sendEmailVerificationEmail(recipient, firstName, lastName, userID){
+export default async function sendEmailVerificationEmail(userID, recipient, firstName, lastName){
     let transporter;
     try{
         const keyName = 'emailVerification';
