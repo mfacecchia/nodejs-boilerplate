@@ -4,9 +4,10 @@ import { handleError } from "../errors/errorHandler.errors.js";
 import { clearAllCookies } from "../utils/cookies.utility.js";
 import { deleteUser, updateUser } from "../../db/queries/mysql/user.mysql.query.js";
 import { hashPassword } from "../security/hashing.security.js";
+import { validateUserUpdate } from "../validation/user.validator.js";
+import { userDeleteRateLimit, userUpdateRateLimit } from "../utils/rateLimiters.utility.js";
 
 
-// TODO: Add validation & rate limit mws
 export default function userManagement(app){
     app.route('/api/user')
         .get(isLoggedIn({ strict: true, sendResponseOnValidToken: false, returnLastUserValues: true }), async (req, res) => {
@@ -23,7 +24,7 @@ export default function userManagement(app){
                 return await handleError(req, res, err);
             }
         })
-        .put(isLoggedIn({ strict: true, sendResponseOnValidToken: false, returnLastUserValues: true }), isCsrfTokenValid(), async (req, res) => {
+        .put(isLoggedIn({ strict: true, sendResponseOnValidToken: false, returnLastUserValues: true }), isCsrfTokenValid(), validateUserUpdate(), userUpdateRateLimit, async (req, res) => {
             try{
                 const { firstName, lastName, email, password } = req.body;
                 const { userID } = req.lastUserValues;
@@ -40,7 +41,7 @@ export default function userManagement(app){
                 return await handleError(req, res, err);
             }
         })
-        .delete(isLoggedIn({ strict: true, sendResponseOnValidToken: false, returnLastUserValues: true }), isCsrfTokenValid(), async (req, res) => {
+        .delete(isLoggedIn({ strict: true, sendResponseOnValidToken: false, returnLastUserValues: true }), isCsrfTokenValid(), userDeleteRateLimit, async (req, res) => {
             try{
                 await deleteUser(req.lastUserValues.userID);
                 await clearAllCookies(req, res);
