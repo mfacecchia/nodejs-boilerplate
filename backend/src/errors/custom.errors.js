@@ -72,19 +72,27 @@ export class FoundError extends AppError{
     }
 }
 
-export class TokenGenerationError extends AppError{
-    constructor(message){
-        super(message);
-        this.name = "TokenGenerationError";
-        this.statusCode = 500;
-    }
-}
-
 export class TokenValidationError extends AppError{
     constructor(message){
         super(message);
         this.name = "TokenValidationError";
         this.statusCode = 401;
+    }
+}
+
+export class CodeValidationError extends AppError{
+    constructor(message){
+        super(message);
+        this.name = "ResetCodeValidationError";
+        this.statusCode = 400;
+    }
+}
+
+export class GenerationError extends AppError{
+    constructor(message){
+        super(message);
+        this.name = "GenerationError";
+        this.statusCode = 500;
     }
 }
 
