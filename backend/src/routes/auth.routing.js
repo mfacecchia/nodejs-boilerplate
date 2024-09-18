@@ -16,6 +16,7 @@ import { getKeyValue, removeKeyValue } from '../../db/queries/redis/keyValueMana
 import sendEmailVerificationEmail from '../mail/emailVerification.mail.js';
 import isCsrfTokenValid from '../middlewares/isCsrfTokenValid.middleware.js';
 import isEmailVerified from '../middlewares/isEmailVerified.middleware.js';
+import sendPasswordResetEmail from '../mail/passwordReset.mail.js';
 
 
 export default function userAuth(app){
@@ -92,6 +93,22 @@ export default function userAuth(app){
             return res.status(200).json({
                 status: 200,
                 message: "Verification code sent. Check your inbox or the spam folder."
+            });
+        }catch(err){
+            return await handleError(req, res, err);
+        }
+    });
+    
+    // TODO: Add rate limit mw
+    app.post('/user/reset/generate', async (req, res) => {
+        try{
+            const { email } = req.body;
+            const userData = await findUser(email, { isID: false, throwOnFound: false, getFullInfo: false });
+            const { firstName, lastName, userID } = userData;
+            await sendPasswordResetEmail(userID, email, firstName, lastName);
+            return res.status(200).json({
+                status: 200,
+                message: "Reset code sent."
             });
         }catch(err){
             return await handleError(req, res, err);
