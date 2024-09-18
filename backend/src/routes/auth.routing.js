@@ -11,6 +11,9 @@ import { defaultCookieOptions } from '../utils/constants.utility.js';
 import { clearAllCookies } from '../utils/cookies.utility.js';
 import { validateLogin, validateSignup } from '../validation/auth.validator.js';
 import { loginRateLimit, signupRateLimit } from '../utils/rateLimiters.utility.js';
+import sendEmailVerificationEmail from '../mail/emailVerification.mail.js';
+import isCsrfTokenValid from '../middlewares/isCsrfTokenValid.middleware.js';
+import isEmailVerified from '../middlewares/isEmailVerified.middleware.js';
 
 
 export default function userAuth(app){
@@ -53,6 +56,20 @@ export default function userAuth(app){
             return res.status(200).json({
                 status: 200,
                 message: "Logged out successfully."
+            });
+        }catch(err){
+            return await handleError(req, res, err);
+        }
+    });
+    
+    app.post('/user/verify/generate', isLoggedIn({ strict: true, sendResponseOnValidToken: false, returnLastUserValues: true }), isCsrfTokenValid(), isEmailVerified({ strict: false, sendResponseOnVerifiedEmail: true }), async (req, res) => {
+        try{
+            const { userID, firstName, lastName } = req.lastUserValues;
+            const { email } = req.lastUserValues.credential[0];
+            await sendEmailVerificationEmail(email, firstName, lastName, userID);
+            return res.status(200).json({
+                status: 200,
+                message: "Verification code sent. Check your inbox or the spam folder."
             });
         }catch(err){
             return await handleError(req, res, err);
