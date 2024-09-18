@@ -1,5 +1,5 @@
 import { RedisClient } from '../../redisClient.db.js';
-import AppError, { TokenValidationError, DataFetchError, NotFoundError } from '../../../src/errors/custom.errors.js';
+import AppError, { TokenValidationError, DataFetchError, NotFoundError, CodeValidationError } from '../../../src/errors/custom.errors.js';
 import 'dotenv/config';
 import { logError } from '../../../src/errors/errorHandler.errors.js';
 
@@ -14,6 +14,14 @@ const redisPrefixes = {
     CSRF: {
         keyPrefix: 'CSRF',
         invalidKeyError: new TokenValidationError('Invalid security token.')
+    },
+    emailVerification: {
+        keyPrefix: 'emailVerification',
+        invalidKeyError: new CodeValidationError('Invalid Email verification code.')
+    },
+    passwordReset: {
+        keyPrefix: 'passwordReset',
+        invalidKeyError: new CodeValidationError('Invalid password reset code.')
     }
 };
 
