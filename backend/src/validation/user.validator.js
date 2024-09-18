@@ -47,7 +47,7 @@ export function validateUserUpdate(){
             validate.validators.oldPasswordMatches = oldPasswordMatches;
             await validate.async(req.body, validators, { wrapErrors: ValidationError });
             // Formatting input
-            if(req.body.email && req.body.email.toLowerCase() !== req.lastUserValues.email.toLowerCase()) req.body.email = req.body.email.toLowerCase();
+            if(req.body.email && req.body.email.toLowerCase() !== req.lastUserValues.credential[0].email.toLowerCase()) req.body.email = req.body.email.toLowerCase();
             else req.body.email = undefined;
             if(req.body.firstName) req.body.firstName = validate.capitalize(req.body.firstName.trim());
             if(req.body.lastName) req.body.lastName = validate.capitalize(req.body.lastName.trim());
