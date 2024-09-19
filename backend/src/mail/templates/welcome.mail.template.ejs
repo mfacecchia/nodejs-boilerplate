@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <%- include('../partials/head.mail.partial.ejs') %>
+    <body>
+        <h1 style = "font-size: x-large; margin-bottom: 0">Welcome aboard, <i style = "color: #141414"><%= firstName + ' ' + lastName %></i>!</h1>
+        <br>
+        <div class = "font-size: medium">
+            <b>Important notice:</b>
+            <p>In order to be able to access all application's functionalities, the system requires each user to verify the registered email. Please click the button below or click on the following link to verify your email.</p>
+            <p><a href = "<%=verificationLink%>"><%=verificationLink%></a></p>
+            <b>Please note that the code is valid for just 10 minutes for security purposes. After the code becomes invalid, you will need to request a new one.</b>
+        </div>
+
+        <div style = "width: 100%; margin-top: 50px; text-align: center;">
+            <a href = "<%=verificationLink%>" style = "box-sizing: border-box; padding: 10px 25px; color: white; background: #1A103D; font-size: medium; text-decoration: none; border-radius: 0.5rem;">VERIFY EMAIL</a>
+        </div>
+        
+        <hr style = "width: 80%; height: 0.5px; margin-left: auto; margin-right: auto; margin-bottom: 30px; margin-top: 30px; border: none; background: rgba(0,0,0,0.5)">
+        
+        <%- include('../partials/footer.mail.partial.ejs', {signature: true}) %>
+    </body>
+</html>
