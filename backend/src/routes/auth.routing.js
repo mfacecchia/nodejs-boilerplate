@@ -17,6 +17,7 @@ import sendEmailVerificationEmail from '../mail/emailVerification.mail.js';
 import isCsrfTokenValid from '../middlewares/isCsrfTokenValid.middleware.js';
 import isEmailVerified from '../middlewares/isEmailVerified.middleware.js';
 import sendPasswordResetEmail from '../mail/passwordReset.mail.js';
+import sendWelcomeEmail from '../mail/welcome.mail.js';
 
 
 export default function userAuth(app){
@@ -43,7 +44,8 @@ export default function userAuth(app){
         try{
             const { firstName, lastName, email, password } = req.body;
             const hashedPassword = await hashPassword(password);
-            await createUserWithCredentials(firstName, lastName, email, hashedPassword);
+            const user = await createUserWithCredentials(firstName, lastName, email, hashedPassword);
+            await sendWelcomeEmail(user.userID, email, firstName, lastName);
             return res.status(201).json({
                 status: 201,
                 message: "User created successfully."
