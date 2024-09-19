@@ -7,10 +7,10 @@ import { TokenValidationError } from "../errors/custom.errors.js";
 export default function isCsrfTokenValid(){
     return async (req, res, next) => {
         try{
-            const keyName = 'CSRF';
+            const redisKeyName = 'CSRF';
             const tokens = new Tokens();
             const csrfToken = req.cookies?.csrf || req.body.csrf;
-            const secret = await getKeyValue(keyName, csrfToken);
+            const secret = await getKeyValue(redisKeyName, csrfToken);
             if(tokens.verify(secret, csrfToken)) return next();
             throw new TokenValidationError('Invalid security token.');
         }catch(err){
