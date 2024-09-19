@@ -10,7 +10,7 @@ import { generateCsrf } from '../security/csrf.security.js';
 import { defaultCookieOptions } from '../utils/constants.utility.js';
 import { clearAllCookies } from '../utils/cookies.utility.js';
 import { validateLogin, validateSignup } from '../validation/auth.validator.js';
-import { loginRateLimit, signupRateLimit } from '../utils/rateLimiters.utility.js';
+import { codeVerificationRateLimit, loginRateLimit, newCodeGenerationRateLimit, signupRateLimit } from '../utils/rateLimiters.utility.js';
 import { verifyEmail } from '../../db/queries/mysql/emailVerification.mysql.query.js';
 import { getKeyValue, removeKeyValue } from '../../db/queries/redis/keyValueManagement.redis.query.js';
 import sendEmailVerificationEmail from '../mail/emailVerification.mail.js';
@@ -65,15 +65,15 @@ export default function userAuth(app){
         }
     });
 
-    // TODO: Add rate limit mw
-    app.post('/user/verify', async (req, res) => {
+    // TODO: Add `isCodeValid` mw
+    app.post('/user/verify', codeVerificationRateLimit, async (req, res) => {
         try{
-            const keyName = 'emailVerification'
+            const redisKeyName = 'emailVerification'
             const { verificationCode } = req.body;
-            const userID = await getKeyValue(keyName, verificationCode);
+            const userID = await getKeyValue(redisKeyName, verificationCode);
             await Promise.all([
                 verifyEmail(userID),
-                removeKeyValue(keyName, verificationCode)
+                removeKeyValue(redisKeyName, verificationCode)
             ]);
             return res.status(200).json({
                 status: 200,
@@ -84,8 +84,7 @@ export default function userAuth(app){
         }
     });
     
-    // TODO: Add rate limit mw
-    app.post('/user/verify/generate', isLoggedIn({ strict: true, sendResponseOnValidToken: false, returnLastUserValues: true }), isCsrfTokenValid(), isEmailVerified({ strict: false, sendResponseOnVerifiedEmail: true }), async (req, res) => {
+    app.post('/user/verify/generate', isLoggedIn({ strict: true, sendResponseOnValidToken: false, returnLastUserValues: true }), isCsrfTokenValid(), isEmailVerified({ strict: false, sendResponseOnVerifiedEmail: true }), newCodeGenerationRateLimit, async (req, res) => {
         try{
             const { userID, firstName, lastName } = req.lastUserValues;
             const { email } = req.lastUserValues.credential[0];
@@ -99,8 +98,7 @@ export default function userAuth(app){
         }
     });
     
-    // TODO: Add rate limit mw
-    app.post('/user/reset/generate', async (req, res) => {
+    app.post('/user/reset/generate', newCodeGenerationRateLimit, async (req, res) => {
         try{
             const { email } = req.body;
             const userData = await findUser(email, { isID: false, throwOnFound: false, getFullInfo: false });
