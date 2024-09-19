@@ -62,3 +62,21 @@ export function validateSignup(){
         return next();
     }
 }
+
+export function validatePasswordReset(){
+    return async (req, res, next) => {
+        try{
+            const validators = {
+                password: {
+                    ...defaultPresenceValidator,
+                    ...defaultPasswordMinLength
+                }
+            };
+            await validate.async(req.body, validators, { wrapErrors: ValidationError });
+        }catch(err){
+            logError(err);
+            return await handleError(req, res, err);
+        }
+        return next();
+    }
+}
