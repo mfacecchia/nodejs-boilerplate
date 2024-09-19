@@ -2,14 +2,14 @@ import argon2 from 'argon2';
 import { InvalidCredentialsError } from '../errors/custom.errors.js';
 import { handleError } from '../errors/errorHandler.errors.js';
 import { hashPassword } from '../security/hashing.security.js';
-import { createUserWithCredentials } from '../../db/queries/mysql/user.mysql.query.js';
+import { createUserWithCredentials, updateUser } from '../../db/queries/mysql/user.mysql.query.js';
 import isLoggedIn from '../middlewares/isLoggedIn.middleware.js';
 import { findUser } from '../../db/queries/mysql/user.mysql.query.js';
 import { generateJWT } from '../auth/jwt.auth.js';
 import { generateCsrf } from '../security/csrf.security.js';
 import { defaultCookieOptions } from '../utils/constants.utility.js';
 import { clearAllCookies } from '../utils/cookies.utility.js';
-import { validateLogin, validateSignup } from '../validation/auth.validator.js';
+import { validateLogin, validatePasswordReset, validateSignup } from '../validation/auth.validator.js';
 import { codeVerificationRateLimit, loginRateLimit, newCodeGenerationRateLimit, signupRateLimit } from '../utils/rateLimiters.utility.js';
 import { verifyEmail } from '../../db/queries/mysql/emailVerification.mysql.query.js';
 import { getKeyValue, removeKeyValue } from '../../db/queries/redis/keyValueManagement.redis.query.js';
@@ -92,6 +92,27 @@ export default function userAuth(app){
             return res.status(200).json({
                 status: 200,
                 message: "Verification code sent. Check your inbox or the spam folder."
+            });
+        }catch(err){
+            return await handleError(req, res, err);
+        }
+    });
+
+    // TODO: Add `isCodeValid` mw
+    app.put('/user/reset', validatePasswordReset(), codeVerificationRateLimit, async (req, res) => {
+        try{
+            const redisKeyName = 'passwordReset'
+            const { resetCode, password } = req.body;
+            const userID = await getKeyValue(redisKeyName, resetCode);
+            const hashedPassword = await hashPassword(password);
+            await Promise.all([
+                updateUser(userID, undefined, undefined, undefined, hashedPassword, { getFullInfo: false }),
+                clearAllCookies(req, res),
+                removeKeyValue(redisKeyName, resetCode),
+            ]);
+            return res.status(200).json({
+                status: 200,
+                message: "Password reset successfully."
             });
         }catch(err){
             return await handleError(req, res, err);
