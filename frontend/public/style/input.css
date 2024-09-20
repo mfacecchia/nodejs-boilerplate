@@ -10,6 +10,9 @@
     body{
         @apply overflow-x-clip min-h-screen flex flex-col relative text-secondary font-roboto min-w-[300px];
     }
+    body[inert]{
+        @apply overflow-hidden max-h-screen;
+    }
     p, a{
         @apply text-xl;
     }
@@ -18,6 +21,19 @@
     }
     svg{
         @apply inline-block size-5 stroke-secondary fill-none;
+    }
+    form h1{
+        @apply text-3xl mb-3;
+    }
+    form :is(input, textarea, select, option){
+        @apply appearance-none w-64 p-1 box-border rounded-sm border border-secondary;
+    }
+    input[type="checkbox"]{
+        @apply appearance-auto w-auto;
+    }
+    form button[type="submit"]{
+        @apply rounded-full text-base-100 bg-secondary px-3 py-1 text-lg font-bold w-36 mt-3;
+        @apply xl:mt-5;
     }
     #welcome{
         @apply h-screen w-full flex flex-col items-center justify-center text-center gap-10;
@@ -28,11 +44,23 @@
     #devContacts{
         @apply flex gap-3 justify-center items-center;
     }
+    .fullScreenForm{
+        @apply h-screen w-full flex flex-col items-center justify-center text-center gap-3;
+    }
     .title h1{
         @apply text-8xl;
     }
     .title h3{
         @apply text-2xl
+    }
+    .loadingBackdrop{
+        @apply bg-black/80 absolute top-0 left-0 w-full h-full flex items-center justify-center flex-col gap-5 z-40;
+    }
+    .inputError{
+        @apply border border-error text-error;
+    }
+    input + .errorMessagesContainer{
+        @apply text-error mb-4;
     }
 }
 
