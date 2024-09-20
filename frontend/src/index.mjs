@@ -1,5 +1,6 @@
 import express from 'express';
 import 'dotenv/config';
+import userAuth from './routes/auth.routing.mjs';
 
 
 const app = express();
@@ -12,6 +13,8 @@ app.set('x-powered-by', false);
 app.get('/', (req, res) => {
     res.render('pages/index');
 });
+
+userAuth(app);
 
 // 404 status code error handling
 app.use((req, res) => {
