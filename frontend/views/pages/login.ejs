@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+    <%- include('../partials/head.partial.ejs', {title: 'Log-In'}) %>
+    <body inert>
+        <%- include('../partials/loading.partial.ejs') %>
+        
+        <form id = "loginForm" class = "fullScreenForm">
+            <h1>Log-In</h1>
+            <input type = "email" name = "email" placeholder = "Email*" required>
+            <input type = "password" name = "password" placeholder = "Password*" required>
+
+            <button type = "submit">SUBMIT</button>
+        </form>
+
+        <div class = "toast"></div>
+
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+        <script src = "/script/utils/isObject.utility.js"></script>
+        <script src = "/script/utils/createElement.utility.js"></script>
+        <script src = "/script/utils/toggleCheckbox.utility.js"></script>
+        <script src = "/script/utils/formDataToObject.utility.js"></script>
+        <script src = "/script/utils/fetchFromServer.utility.js"></script>
+        <script src = "/script/utils/displayMessage.utility.js"></script>
+        <script src = "/script/utils/formErrorsManagement.utility.js"></script>
+        <script src = "/script/utils/validators.utility.js"></script>
+        <script src = "/script/validation/login.validator.js"></script>
+        <script src = "/script/auth/login.auth.js"></script>
+        <script src = "/script/auth/isLoggedIn.auth.js"></script>
+        <script src = "/script/utils/removeLoadingScreen.utility.js"></script>
+    </body>
+</html>
