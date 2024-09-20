@@ -10,7 +10,7 @@ signupForm.onsubmit = async (e) => {
         showFormValidationErrors(signupForm, err);
         return;
     }
-    // displayMessage('Signing you up. Please wait.', 'info');
+    displayMessage('Signing you up. Please wait.', 'info');
     try{
         const fetchResult = await fetchFromServer('/user/signup/credentials', {
             method: "POST",
