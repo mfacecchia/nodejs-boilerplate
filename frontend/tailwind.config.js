@@ -15,7 +15,20 @@ module.exports = {
     extend: {
       fontFamily: {
         'roboto': ['Roboto', 'sans-serif']
-      }
+      },
+      animation: {
+        'disappear': 'disappearAnim 3s ease-in-out forwards'
+      },
+      keyframes: {
+        'disappearAnim': {
+          '90%': {
+            opacity: 1
+          },
+          '100%': {
+            opacity: 0,
+          }
+        }
+      },
     }
   },
   daisyui: {
