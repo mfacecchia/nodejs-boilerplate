@@ -13,6 +13,6 @@ async function fetchFromServer(endpoint, options = {}){
             jsonRes: jsonRes
         };
     }catch(err){
-        throw new Error('Could not fetch data.');
+        throw new Error('Could not fetch data. Please try again later.');
     }
 }
