@@ -9,6 +9,10 @@
             <h1>Log-In</h1>
             <input type = "email" name = "email" placeholder = "Email*" required>
             <input type = "password" name = "password" placeholder = "Password*" required>
+            <label tabindex = "0" onkeydown = "toggleCheckbox(this, event.code)">
+                <input type = "checkbox" name = "rememberMe" tabindex = "-1">
+                Remember me
+            </label>
 
             <button type = "submit">SUBMIT</button>
         </form>
