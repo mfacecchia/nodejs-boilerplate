@@ -1,12 +1,9 @@
-function toggleCheckbox(checkbox, pressedKey){
+function toggleCheckbox(checkboxContainer, pressedKey){
     /**
      * Enables checkbox selection with `Enter` key press
+     * NOTE: The `checkboxContainer` MUST be an `HTMLElement`
      */
-    if(pressedKey !== 'Enter' || !(checkbox instanceof HTMLElement)) return;
-    // Checking if the element that triggered the event is the checkbox or a parent of it
-    if(checkbox.tagName === 'input') checkbox.checked = !checkbox.checked;
-    else{
-        const checkbox = checkbox.querySelector('input[type="checkbox"]');
-        checkbox.checked = !checkbox.checked;
-    }
+    if(pressedKey !== 'Enter' || !(checkboxContainer instanceof HTMLElement)) return;
+    const checkbox = checkboxContainer.querySelector('input[type="checkbox"]');
+    checkbox.checked = !checkbox.checked;
 }
