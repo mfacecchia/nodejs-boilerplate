@@ -4,6 +4,9 @@ async function validatePasswordReset(userData){
             password: {
                 ...defaultPresenceValidator,
                 ...defaultPasswordMinLength
+            },
+            passwordVerify: {
+                ...defaultEqualityValidator
             }
         };
         await validate.async(userData, validators);
