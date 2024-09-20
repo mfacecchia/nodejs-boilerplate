@@ -29,7 +29,7 @@ loginForm.onsubmit = async (e) => {
         }
         if(!fetchResult.successful) throw new Error(jsonRes.message);
         // Redirecting to homepage after successful authentication
-        // window.location.href = '/';
+        window.location.href = '/user/dashboard';
     }catch(err){
         displayMessage(err.message || 'Could not fetch data. Please try again later.', 'error');
     }
