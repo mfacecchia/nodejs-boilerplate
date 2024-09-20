@@ -2,8 +2,8 @@
 module.exports = {
   content: [
     'views/**/*.{ejs,html}',
-    'src/*.js',
-    'public/script/*.js'
+    'src/**/*.js',
+    'public/script/**/*.js'
   ],
   // List of pre-declared classes to add in the output stylesheet
   safelist: [
