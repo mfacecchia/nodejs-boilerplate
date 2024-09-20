@@ -11,6 +11,6 @@ function displayMessage(message, type){
     messageContainer.onanimationend = e => {
         e.target.remove();
     }
-    messageContainer.appendChild(message);
+    messageContainer.appendChild(textMessage);
     document.querySelector('.toast').appendChild(messageContainer);
 }
