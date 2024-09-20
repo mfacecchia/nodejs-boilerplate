@@ -45,7 +45,9 @@ export default function userAuth(app){
             const { firstName, lastName, email, password } = req.body;
             const hashedPassword = await hashPassword(password);
             const user = await createUserWithCredentials(firstName, lastName, email, hashedPassword);
-            await sendWelcomeEmail(user.userID, email, firstName, lastName);
+            try{
+                await sendWelcomeEmail(user.userID, email, firstName, lastName);
+            }catch(err){ }
             return res.status(201).json({
                 status: 201,
                 message: "User created successfully."
@@ -67,7 +69,6 @@ export default function userAuth(app){
         }
     });
 
-    // TODO: Add `isCodeValid` mw
     app.post('/user/verify', codeVerificationRateLimit, async (req, res) => {
         try{
             const redisKeyName = 'emailVerification'
@@ -100,7 +101,6 @@ export default function userAuth(app){
         }
     });
 
-    // TODO: Add `isCodeValid` mw
     app.put('/user/reset', validatePasswordReset(), codeVerificationRateLimit, async (req, res) => {
         try{
             const redisKeyName = 'passwordReset'
@@ -129,7 +129,7 @@ export default function userAuth(app){
             await sendPasswordResetEmail(userID, email, firstName, lastName);
             return res.status(200).json({
                 status: 200,
-                message: "Reset code sent."
+                message: "Reset code sent. Check your inbox or the spam folder."
             });
         }catch(err){
             return await handleError(req, res, err);

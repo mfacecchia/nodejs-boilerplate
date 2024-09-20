@@ -29,6 +29,7 @@ export default async function sendWelcomeEmail(userID, recipient, firstName, las
             if(err) throw new EmailSendError("Error while sending welcome email.");
         });
     }catch(err){
+        logError(err);
         if(err instanceof AppError) throw err;
         else throw new EmailSendError("Could not send email.");
     }finally{
