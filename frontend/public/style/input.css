@@ -8,7 +8,7 @@
         @apply scroll-smooth;
     }
     body{
-        @apply overflow-x-clip min-h-screen flex flex-col relative text-secondary font-roboto;
+        @apply overflow-x-clip min-h-screen flex flex-col relative text-secondary font-roboto min-w-[300px];
     }
     p, a{
         @apply text-xl;
@@ -33,5 +33,16 @@
     }
     .title h3{
         @apply text-2xl
+    }
+}
+
+@layer components{
+    .toast{
+        @apply whitespace-normal z-50;
+    }
+    .alert span{
+        @apply w-56 text-right;
+        @apply lg:text-xl;
+        @apply xl:text-2xl;
     }
 }
