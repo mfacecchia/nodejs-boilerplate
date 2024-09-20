@@ -28,6 +28,9 @@
     form :is(input, textarea, select, option){
         @apply appearance-none w-64 p-1 box-border rounded-sm border border-secondary;
     }
+    label input[type="checkbox"]{
+        @apply mx-1;
+    }
     input[type="checkbox"]{
         @apply appearance-auto w-auto;
     }

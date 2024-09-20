@@ -553,6 +553,10 @@ html {
   border-color: var(--fallback-s,oklch(var(--s)/var(--tw-border-opacity)));
   padding: 0.25rem;
 }
+    label input[type="checkbox"] {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
     input[type="checkbox"] {
   width: auto;
   -webkit-appearance: auto;
@@ -823,6 +827,11 @@ html {
 }
 @media (hover:hover) {
 
+  .label a:hover {
+    --tw-text-opacity: 1;
+    color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
+  }
+
   .tab:hover {
     --tw-text-opacity: 1;
   }
@@ -1074,6 +1083,18 @@ html {
     --tw-text-opacity: 0.2;
   }
 }
+.label {
+  display: flex;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
 .input {
   flex-shrink: 1;
   -webkit-appearance: none;
@@ -1265,6 +1286,10 @@ input.tab:checked + .tab-content,
   color: var(--fallback-erc,oklch(var(--erc)/var(--tw-text-opacity)));
   --alert-bg: var(--fallback-er,oklch(var(--er)/1));
   --alert-bg-mix: var(--fallback-b1,oklch(var(--b1)/1));
+}
+.btm-nav > * .label {
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 @media (prefers-reduced-motion: no-preference) {
 
@@ -2108,7 +2133,6 @@ input.tab:checked + .tab-content,
   --tw-text-opacity: 1;
   color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity)));
 }
-
 @keyframes ping {
 
   75%, 100% {
@@ -2116,11 +2140,9 @@ input.tab:checked + .tab-content,
     opacity: 0;
   }
 }
-
 .hover\:animate-ping:hover {
   animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
-
 @media (min-width: 1536px) {
 
   .\32xl\:w-3\/5 {
