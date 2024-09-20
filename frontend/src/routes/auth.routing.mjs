@@ -29,4 +29,13 @@ export default function userAuth(app){
             return res.render('pages/emailVerification', {successful: false});
         }
     });
+
+    app.get('/user/reset', async (req, res) => {
+        const resetToken = req.query.q;
+        if(!resetToken){
+            res.render('pages/passwordResetGeneration');
+            return;
+        }
+        res.render('pages/passwordReset');
+    });
 }
