@@ -4,6 +4,14 @@ import { logError } from '../errors/errorHandler.errors.mjs';
 
 
 export default function userAuth(app){
+    app.get('/login', async (req, res) => {
+        res.render('pages/login');
+    });
+
+    app.get('/signup', async (req, res) => {
+        res.render('pages/signup');
+    });
+
     app.get('/user/verify', async (req, res) => {
         const { q: verificationCode} = req.query;
         try{
