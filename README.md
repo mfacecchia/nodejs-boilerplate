@@ -10,6 +10,7 @@ Boilerplate for NodeJS Frontend & Backend Web Application Development
 - [Features](#built-in-features)
 - [Browser Support](#browser-support)
 - [Bug Reports](#bug-reports)
+- [Support The Project](#support-the-project)
 
 ## Requirements
 - [NodeJS](https://nodejs.org/en/download/package-manager) (Latest version recommended)
@@ -108,3 +109,6 @@ Feel like this boilerplate needs some adjustments or have you just found out a b
   - What you'd expect the functionality to do
 
 Any contribution is highly apreciated!
+
+## Support The Project
+Tried this project and want to support the developer in some way? I opened a [Buymeacoffee](https://buymeacoffee.com/mfacecchia) account which you can donate to. Any contribution, even a tiny one is highly appreciated and will spur me continue developing projects like this! Thank you so much 🖤
