@@ -44,15 +44,22 @@ This will install all the node modules and libraries required to run the project
 - [PostCSS](https://postcss.org/)
 - [TailwindCSS](https://tailwindcss.com/docs/installation)
 - [DaisyUI](https://daisyui.com/)
+- [Express.JS](https://expressjs.com/en/4x/api.html#express)
+- [Validate.JS](https://validatejs.org/#validate-js)
 #### Backend
 - [Express.JS](https://expressjs.com/en/4x/api.html#express)
 - [CORS](https://www.npmjs.com/package/cors)
 - [RateLimiter](https://express-rate-limit.mintlify.app/)
+- [Validate.JS](https://validatejs.org/#validate-js)
+- [NodeMailer](https://nodemailer.com/about/)
 #### Database
 - [MySQL](https://dev.mysql.com/doc/refman/8.4/en/)
 - [Prisma ORM](https://www.prisma.io/docs/getting-started/quickstart)
 #### Authentication
 - [JWT](https://www.npmjs.com/package/jsonwebtoken)
+#### Security
+- [CSRF](https://www.npmjs.com/package/csrf)
+- [Argon2](https://www.npmjs.com/package/argon2)
 
 ## Environmental Variables
 A `.env.sample` file is provided in the project for both the [Frontend](https://github.com/mfacecchia/nodejs-boilerplate/blob/main/frontend/.env.sample) and the [Backend](https://github.com/mfacecchia/nodejs-boilerplate/blob/main/backend/.env.sample) with all instructions on how to use it in your project and customize it based on your needs.
@@ -67,14 +74,22 @@ A `.env.sample` file is provided in the project for both the [Frontend](https://
 |--------------|------|
 |PORT          |Express.JS server port |
 |NODE_ENV      |Application's current environment (`development` or `production`)(if the value is on `development`, all app errors will be printed out to console |
-|FRONTEND_ADDRESS | Frontend application's address and port (default to `127.0.0.1:5500`) |
-|DATABASE_URL  |Database connection information (`type://user@password:port/dbname`) |
-|JWT_SECRET    |Json Web Token secret (used for token generation & validation) |
+|FRONTEND_ADDRESS |Frontend application's address and port (default to `127.0.0.1:5500`) |
+|DATABASE_URL  |Database connection string (`type://user@password:port/dbname`) |
+|REDIS_URL    |Redis database connection string (`redis://user:password@host:port/dbNumber`)|
+|JWT_SECRET    |Json Web Token secret (used for token generation & validation)  |
+|NODEMAILER_HOST  |SMTP hostname (ex. `smtp.google.com`) |
+|NODEMAILER_USER  |Email address to use to send messages (ex. `hello@world.com`) |
+|NODEMAILER_PASSWORD  |Email password |
 
 ## Built-In Features
 - Custom classes with the most commonly generated errors & relative errors handling function
-- JWT Generation and Validation
-- Most common rate limiters for Login and Signup endpoints (Login and Signup endpoints currently not included in the project)
+- JWT & CSRF Token Generation and Validation middlewares
+- Most common rate limiters for all the endpoints
+- Sign-Up & Log-In endpoints (data validation middleware included)
+- User CRUD (Obtain, Update, and Delete all user's related information)
+- Email Verification & Password Reset endpoints
+- Most common utility functions & fetch operations (Frontend)
 - ...*and more to come* 👀...
 
 ## Browser Support
