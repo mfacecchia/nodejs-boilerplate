@@ -25,13 +25,16 @@ const redisPrefixes = {
     }
 };
 
+/**
+ * Gets the key-related value by querying Redis storage
+ * For custom preset keys, pass the prefix name in the `key` function parameter and the relative `code` to embed with the key...
+ * ...otherwise for custom keys just pass your custom `key` and leave `code` empty
+ * @param {string} key
+ * @param {string} code
+ * @returns The value in form of `string`
+ * @throws Custom `NotFoundError` or `DataFetchError`
+ */
 export async function getKeyValue(key, code = undefined){
-    /**
-     * Gets the key-related value by querying Redis storage
-     * For custom preset keys, pass the prefix name in the `key` function parameter and the relative `code` to embed with the key
-     * Otherwise for custom keys just pass your custom `key`
-     * Returns the value if found, otherwise throws error-related custom `AppError`
-     */
     try{
         const chosenRedisPrefix = redisPrefixes[key];
         const fullKey = chosenRedisPrefix? `${chosenRedisPrefix.keyPrefix}:${code}`: key;
@@ -46,12 +49,16 @@ export async function getKeyValue(key, code = undefined){
     }
 }
 
+/**
+ * Checks if the key-value pair is present in Redis storage
+ * For custom preset keys, pass the prefix name in the `key` function parameter and the relative `code` to embed with the key...
+ * ...otherwise for custom keys just pass your custom `key` and leave `code` empty
+ * @param {string} key 
+ * @param {string} code 
+ * @returns The key-value pair 'presence' state in form of `Boolean`
+ * @throws Custom `DataFetchError`
+ */
 export async function isKeyValueExistent(key, code = undefined){
-    /**
-     * Checks if the key-value pair is in Redis storage
-     * For custom preset keys, pass the prefix name in the `key` function parameter and the relative `code` to embed with the key
-     * Returns a Boolean value representing the key-value pair 'presence' state, otherwise throws error-related custom `AppError`
-     */
     try{
         const chosenRedisPrefix = redisPrefixes[key];
         const fullKey = chosenRedisPrefix? `${chosenRedisPrefix.keyPrefix}:${code}`: key;
@@ -65,13 +72,18 @@ export async function isKeyValueExistent(key, code = undefined){
     }
 }
 
-
+/**
+ * Stores the key-value pair in Redis storage with a custom `expiryInSeconds`
+ * For custom preset keys, pass the prefix name in the `key` function parameter and the relative `code` to embed with the key...
+ * ...otherwise for custom keys just pass your custom `key` and leave `code` empty
+ * @param {string} key 
+ * @param {string} code 
+ * @param {string} value 
+ * @param {number} expiryInSeconds 
+ * @returns `true` if the key-value pair is successfully stored
+ * @throws Custom `DataFetchError`
+ */
 export async function storeKeyValue(key, code = undefined, value, expiryInSeconds = 0){
-    /**
-     * Stores the key-value pair in Redis storage with a custom `expiryInSeconds`
-     * For custom preset keys, pass the prefix name in the `key` function parameter and the relative `code` to embed with the key
-     * Returns `true` if the key-value pair is successfully stored, otherwise throws error-related custom `AppError`
-     */
     try{
         const chosenRedisPrefix = redisPrefixes[key];
         const fullKey = chosenRedisPrefix? `${chosenRedisPrefix.keyPrefix}:${code}`: key;
@@ -87,12 +99,16 @@ export async function storeKeyValue(key, code = undefined, value, expiryInSecond
     }
 }
 
+/**
+ * Removes the key-value pair from Redis storage
+ * For custom preset keys, pass the prefix name in the `key` function parameter and the relative `code` to embed with the key...
+ * ...otherwise for custom keys just pass your custom `key` and leave `code` empty
+ * @param {string} key 
+ * @param {string} code 
+ * @returns `true` whetever the key-value pair is removed or not
+ * @throws Custom `DataFetchError`
+ */
 export async function removeKeyValue(key, code = undefined){
-    /**
-     * Removes the key-value pair from Redis storage
-     * For custom preset keys, pass the prefix name in the `key` function parameter and the relative `code` to embed with the key
-     * Returns `true` whetever the key-value pair is removed or not, otherwise throws error-related custom `AppError`
-     */
     try{
         const chosenRedisPrefix = redisPrefixes[key];
         const fullKey = chosenRedisPrefix? `${chosenRedisPrefix.keyPrefix}:${code}`: key;
