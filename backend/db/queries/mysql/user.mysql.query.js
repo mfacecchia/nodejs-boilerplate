@@ -4,12 +4,15 @@ import AppError, { DatabaseConnectionError, DatabaseQueryError, DataFetchError, 
 import { logError } from '../../../src/errors/errorHandler.errors.js';
 
 
+/**
+ * Finds a user from the database by a given valid `userField`
+ * The field to check must be either an ID (Number) or an email (String), defined by `isID` boolean parameter
+ * @param {string | number} userField 
+ * @param {object} options
+ * @returns Found user in form of Object
+ * @throws Custom `FoundError` or `NotFoundError` based on the `throwOnFound` param value, or `DatabaseConnectionError`, or `DataFetchError`
+ */
 export async function findUser(userField, { isID = true, throwOnFound = false, getFullInfo = false } = {}){
-    /**
-     * Finds a user from the database by a given valid `userField`
-     * The field to check must be either an ID (defined by a number) or an email (string), defined by `isID` boolean parameter
-     * Throws a custom `FoundError` or `NotFoundError` based on the `throwOnFound` param value, otherwise returns the found user
-     */
     try{
         const user = await prisma.user.findFirst({
             include: {
@@ -32,10 +35,16 @@ export async function findUser(userField, { isID = true, throwOnFound = false, g
     }
 }
 
+/**
+ * Creates a new user in the database using Email/Password combination
+ * @param {string} firstName 
+ * @param {string} lastName 
+ * @param {string} email 
+ * @param {string} hashedPassword 
+ * @returns Created user in form of Object
+ * @throws Custom `DatabaseConnectionError`, `DatabaseQueryError`, `FoundError`, or `FoundError`
+ */
 export async function createUserWithCredentials(firstName, lastName, email, hashedPassword){
-    /**
-     * Creates a new user in the database using Email/Password combination
-     */
     try{
         const user = await prisma.user.create({
             data: {
@@ -64,10 +73,16 @@ export async function createUserWithCredentials(firstName, lastName, email, hash
     }
 }
 
+/**
+ * Creates a new user in the database using OAuth authentication
+ * @param {string} firstName 
+ * @param {string} lastName 
+ * @param {number} googleID 
+ * @param {number} githubID 
+ * @returns Created user in form of Object
+ * @throws Custom `DatabaseConnectionError` or `DatabaseQueryError`
+ */
 export async function createUserWithOAuth(firstName, lastName, googleID, githubID){
-    /**
-     * Creates a new user in the database using OAuth authentication
-     */
     if(!googleID && !githubID) throw new DatabaseQueryError('Could not create the user. Invalid or missing required data.');
     try{
         const user = await prisma.user.create({
@@ -96,6 +111,17 @@ export async function createUserWithOAuth(firstName, lastName, googleID, githubI
     }
 }
 
+/**
+ * Updates an already existing user on the database
+ * @param {number} userID 
+ * @param {string} firstName 
+ * @param {string} lastName 
+ * @param {string} email 
+ * @param {string} hashedPassword 
+ * @param {object} options
+ * @returns Updated user in form of Object
+ * @throws Custom `DatabaseConnectionError`, `DatabaseQueryError`, or `FoundError`
+ */
 export async function updateUser(userID, firstName, lastName, email, hashedPassword, { getFullInfo = false } = {}){
     try{
         const user = await prisma.user.update({
@@ -136,6 +162,11 @@ export async function updateUser(userID, firstName, lastName, email, hashedPassw
     }
 }
 
+/**
+ * Deletes an existing user from the database
+ * @param {number} userID 
+ * @returns Deleted user in form of Object
+ */
 export async function deleteUser(userID){
     try{
         const user = await prisma.user.delete({
