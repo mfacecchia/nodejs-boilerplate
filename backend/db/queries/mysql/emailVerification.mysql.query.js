@@ -4,6 +4,11 @@ import { DatabaseConnectionError, DatabaseQueryError } from '../../../src/errors
 import { logError } from '../../../src/errors/errorHandler.errors.js';
 
 
+/**
+ * @param {number} userID 
+ * @returns `true` in case the email is successfully verified
+ * @throws Custom `DatabaseConnectionError` or `DatabaseQueryError`
+ */
 export async function verifyEmail(userID){
     try{
         await prisma.credential.update({
