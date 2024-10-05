@@ -6,6 +6,14 @@ import { generateCode } from "../utils/codesManagement.utility.js";
 import { logError } from "../errors/errorHandler.errors.js";
 
 
+/**
+ * Sends a password reset mail to the defined `recipient` with the generated `resetLink`
+ * @param {number} userID
+ * @param {string} recipient
+ * @param {string} firstName
+ * @param {string} lastName
+ * @throws Custom `EmailSendError`if unable to send email for any reason
+ */
 export default async function sendPasswordResetEmail(userID, recipient, firstName, lastName){
     let transporter;
     try{

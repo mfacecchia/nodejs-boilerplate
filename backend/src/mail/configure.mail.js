@@ -7,6 +7,7 @@ import { MailingSystemConnectionError } from '../errors/custom.errors.js';
  * Initiates a connection with the mailing system through Email/Password combination.
  * The connection is made through secure TLS over port 465.
  * @returns `transporter` Object
+ * @throws Custom `MailingSystemConnectionError` if the client cannot connect to provider
  */
 export async function configureMailingSystem(){
     const transporter = nodemailer.createTransport({

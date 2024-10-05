@@ -6,6 +6,14 @@ import { generateCode } from "../utils/codesManagement.utility.js";
 import { logError } from "../errors/errorHandler.errors.js";
 
 
+/**
+ * Sends an Email verification mail to the defined `recipient` with the generated `verificationLink`
+ * @param {number} userID
+ * @param {string} recipient
+ * @param {string} firstName
+ * @param {string} lastName
+ * @throws Custom `EmailSendError`if unable to send email for any reason
+ */
 export default async function sendEmailVerificationEmail(userID, recipient, firstName, lastName){
     let transporter;
     try{
