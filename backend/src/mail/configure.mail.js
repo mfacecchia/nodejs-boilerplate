@@ -3,6 +3,11 @@ import 'dotenv/config';
 import { MailingSystemConnectionError } from '../errors/custom.errors.js';
 
 
+/**
+ * Initiates a connection with the mailing system through Email/Password combination.
+ * The connection is made through secure TLS over port 465.
+ * @returns `transporter` Object
+ */
 export async function configureMailingSystem(){
     const transporter = nodemailer.createTransport({
         host: process.env.NODEMAILER_HOST,
@@ -16,6 +21,11 @@ export async function configureMailingSystem(){
     return transporter;
 }
 
+/**
+ * Checks if the `transporter` Object is ready to send emails
+ * @param {object} transporter 
+ * @returns a `Promise` that resolves with `true` if ready to send emails, otherwise `false`
+ */
 export function isMailingSystemReady(transporter){
     return new Promise((resolve, reject) => {
         transporter.verify(function (err, success) {
