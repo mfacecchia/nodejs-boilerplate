@@ -4,6 +4,11 @@ import { handleError, logError } from "../errors/errorHandler.errors.js";
 import { TokenValidationError } from "../errors/custom.errors.js";
 
 
+/**
+ * Checks if the user's CSRF token is valid by checking its existence in Redis storage
+ * and by verifying it with the obtained `secret`
+ * @throws Custom `TokenValidationError`
+ */
 export default function isCsrfTokenValid(){
     return async (req, res, next) => {
         try{

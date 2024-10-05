@@ -6,14 +6,16 @@ import { handleError, logError } from "../errors/errorHandler.errors.js";
 import 'dotenv/config';
 
 
+/**
+ * Checks if the user is already logged in by validating the JWT passed in the request header (parsed by cookie-parser in `req.cookies`).
+ * Sends a response in case the JWT is invalid or missing (if `strict` is set to `true`)
+ * or if the user is logged in and `sendResponseOnValidToken` is set to `true`, otherwise calls `next()`
+ * The `strict` parameter can be set to `true` in case you want to send 401 status code if the token does not exist as well
+ * The `returnLastUserValues` is used to set the values obtained from the `findUser()` function in a specific `req.lastUserValues` Object
+ * @param {object} options
+ * @throws Custom `TokenValidationError` if the JWT is invalid or missing (if the `strict` option is set to `true`)
+ */
 export default function isLoggedIn({ strict = true, sendResponseOnValidToken = false, returnLastUserValues = false } = {}){
-    /**
-     * Checks if the user is already logged in by validating the JWT passed in the request header (parsed by cookie-parser in `req.cookies`)
-     * Sends a response in case the JWT is invalid or missing (if `strict` is set to `true`)...
-     * ...or if the user is logged in and `sendResponseOnValidToken` is set to true, otherwise calls `next()`
-     * The `strict` parameter can be set to `true` in case you want to send 401 status code if the token does not exist as well
-     * The `returnLastUserValues` is used to return the values obtained from the `findUser()` function
-     */
     return async (req, res, next) => {
         try{
             const redisKeyName = 'JWT';

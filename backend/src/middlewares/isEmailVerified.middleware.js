@@ -1,8 +1,10 @@
+/**
+ * Checks the current user's verification status and blocks it from making the request if not verified.
+ * The `strict` parameter can be set to `true` in case you want to send 403 status code if the user is not verified as well
+ * @param {object} options
+ * @returns response Object (`res`) in form of JSON
+ */
 export default function isEmailVerified({ strict = true, sendResponseOnVerifiedEmail = false } = {}){
-    /**
-     * Checks the current user's verification status and blocks it from making the request if not verified
-     * The `strict` parameter can be set to `true` in case you want to send 403 status code if the user is not verified as well
-     */
     return async (req, res, next) => {
         const { verified: isEmailVerified } = req.lastUserValues.credential[0];
         if(strict && !isEmailVerified){
