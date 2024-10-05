@@ -3,12 +3,16 @@ import { clearAllCookies } from '../utils/cookies.utility.js';
 import 'dotenv/config';
 
 
+/**
+ * Handles the provided `err` and returns a meaningful response based on the error type
+ * @param {object} req 
+ * @param {object} res 
+ * @param {Error} err 
+ * @returns response Object (`res`) in form of JSON
+ */
 export async function handleError(req, res, err){
-    /**
-     * Handles the provided `err` and returns a meaningful response based on the error type
-     */
     logError(err);
-    if(!err instanceof AppError){
+    if(!(err instanceof AppError)){
         return res.status(500).json({
             status: 500,
             message: "An unexpected error occurred. Please try again later."
@@ -34,9 +38,10 @@ export async function handleError(req, res, err){
     });
 }
 
+/**
+ * Logs the caught `err` in the console if the app environment is 'development'
+ * @param {Error} err 
+ */
 export function logError(err){
-    /**
-     * Logs the caught `err` in the console if the app environment is 'development'
-     */
     if(process.env.NODE_ENV === 'development') console.error(err);
 }
